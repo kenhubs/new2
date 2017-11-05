@@ -3,7 +3,7 @@
         <!--面包屑导航 开始-->
 <div class="crumb_warp">
     <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-    <i class="fa fa-home"></i> <a href="{{url('admin/info')}}">首页</a> &raquo; 文章管理
+    <i class="fa fa-home"></i> <a href="{{url('admin/index')}}">首页</a> &raquo; 文章管理
 </div>
 <!--面包屑导航 结束-->
 
@@ -54,7 +54,7 @@
                 </td>
             </tr>
             <tr>
-                <th>编辑：</th>
+                <th>作者：</th>
                 <td>
                     <input type="text" class="sm" name="art_editor">
                 </td>
@@ -62,7 +62,7 @@
             <tr>
                 <th>缩略图：</th>
                 <td>
-                    <input type="text" size="50" name="art_thumb">
+                    <input type="hidden" size="50" name="art_thumb">
                     <input id="file_upload" name="file_upload" type="file" multiple="true">
                     <script src="{{asset('resources/org/uploadify/jquery.uploadify.min.js')}}" type="text/javascript"></script>
                     <link rel="stylesheet" type="text/css" href="{{asset('resources/org/uploadify/uploadify.css')}}">
@@ -78,9 +78,14 @@
                                 'swf'      : "{{asset('resources/org/uploadify/uploadify.swf')}}",
                                 'uploader' : "{{url('admin/upload')}}",
                                 'onUploadSuccess' : function(file, data, response) {
-                                    $('input[name=art_thumb]').val(data);
-                                    $('#art_thumb_img').attr('src','/'+data);
-//                                    alert(data);
+                                    /*$('input[name=art_thumb]').val(data);
+                                    $('#art_thumb_img').attr('src','/'+data);*/
+
+                                    $('#art_thumb_img').append('<img src="/'+data+'" alt="" style="max-width: 350px; max-height:100px;">')
+                                    var imgValue = $('input[name=art_thumb]').val()
+                                    imgValue += imgValue ? ','+data : data
+                                    $('input[name=art_thumb]').val(imgValue);
+//
                                 }
                             });
                         });
@@ -94,23 +99,27 @@
             </tr>
             <tr>
                 <th></th>
-                <td>
-                    <img src="" alt="" id="art_thumb_img" style="max-width: 350px; max-height:100px;">
+                <td id="art_thumb_img">
                 </td>
             </tr>
             <tr>
-                <th>关键词：</th>
+                <th>[选填] 小区：</th>
                 <td>
-                    <input type="text" class="lg" name="art_tag">
+                    <input type="text" class="lg" name="art_area" value="" placeholder="根据实际情况选填">
                 </td>
             </tr>
             <tr>
-                <th>描述：</th>
+                <th>[选填] 电话：</th>
                 <td>
-                    <textarea name="art_description"></textarea>
+                    <input type="text" class="lg" name="art_phone" value="" placeholder="根据实际情况选填">
                 </td>
             </tr>
-
+            <tr>
+                <th>[选填] 地址：</th>
+                <td>
+                    <input type="text" class="lg" name="art_address" value="" placeholder="根据实际情况选填">
+                </td>
+            </tr>
             <tr>
                 <th>文章内容：</th>
                 <td>

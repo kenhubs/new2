@@ -13,12 +13,35 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/', 'Home\IndexController@index');
-    Route::get('/cate/{cate_id}', 'Home\IndexController@cate');
-    Route::get('/a/{art_id}', 'Home\IndexController@article');
+    //Route::get('/', 'Home\IndexController@index');
+    //Route::get('/cate/{cate_id}', 'Home\IndexController@cate');
+    //Route::get('/a/{art_id}', 'Home\IndexController@article');
 
     Route::any('admin/login', 'Admin\LoginController@login');
     Route::get('admin/code', 'Admin\LoginController@code');
+});
+
+Route::group(['middleware' => ['web'],'prefix'=>'api','namespace'=>'Api'], function () {
+    Route::get('/notice/list', 'ApiController@noticeList');
+    Route::get('/notice/{id}', 'ApiController@noticeDetail');
+    Route::get('/news/list', 'ApiController@newsList');
+    Route::get('/news/{id}', 'ApiController@newsDetail');
+    Route::get('/culture/list', 'ApiController@cultureList');
+    Route::get('/culture/{id}', 'ApiController@culture');
+    Route::get('/baike/list', 'ApiController@baikeList');
+    Route::get('/baike/{id}', 'ApiController@baikeDetail');
+    Route::get('/convenience/list', 'ApiController@convenienceList');
+    Route::get('/convenience/{id}', 'ApiController@convenienceDetail');
+
+    //智慧商圈
+    Route::get('/business/sub', 'ApiController@businessSub');//子类
+    Route::get('/business/sub/list/{id}', 'ApiController@businessSubList');//子类列表
+    Route::get('/business/sub/detail/{id}', 'ApiController@businessSubDetail');//子类
+
+    //广告
+    Route::get('/ad/lunbo', 'ApiController@adLunbo');//轮播
+    Route::get('/ad/list', 'ApiController@adList');//列表页广告
+    Route::get('/ad/text', 'ApiController@adText');//文字广告
 });
 
 
@@ -45,5 +68,8 @@ Route::group(['middleware' => ['web','admin.login'],'prefix'=>'admin','namespace
     Route::resource('config', 'ConfigController');
 
     Route::any('upload', 'CommonController@upload');
+    Route::any('cache/clear', 'CommonController@cacheClear');
+
+    Route::resource('ad', 'AdController');
 
 });

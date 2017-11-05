@@ -3,7 +3,7 @@
         <!--面包屑导航 开始-->
 <div class="crumb_warp">
     <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-    <i class="fa fa-home"></i> <a href="{{url('admin/info')}}">首页</a> &raquo; 分类管理
+    <i class="fa fa-home"></i> <a href="{{url('admin/index')}}">首页</a> &raquo; 分类管理
 </div>
 <!--面包屑导航 结束-->
 
@@ -56,6 +56,52 @@
                 </td>
             </tr>
             <tr>
+                <th><i class="require">*</i>唯一识别码：</th>
+                <td>
+                    <input type="text" name="cate_uuid" placeholder="取分类名称首字母的大写">
+                    <span><i class="fa fa-exclamation-circle yellow"></i>必须填写</span>
+                </td>
+            </tr>
+            <tr>
+                <th>图标：</th>
+                <td>
+                    <input type="text" size="50" name="cate_icon">
+                    <input id="file_upload" name="file_upload" type="file" multiple="true">
+                    <script src="{{asset('resources/org/uploadify/jquery.uploadify.min.js')}}" type="text/javascript"></script>
+                    <link rel="stylesheet" type="text/css" href="{{asset('resources/org/uploadify/uploadify.css')}}">
+                    <script type="text/javascript">
+                        <?php $timestamp = time();?>
+                        $(function() {
+                            $('#file_upload').uploadify({
+                                'buttonText' : '图片上传',
+                                'formData'     : {
+                                    'timestamp' : '<?php echo $timestamp;?>',
+                                    '_token'     : "{{csrf_token()}}"
+                                },
+                                'swf'      : "{{asset('resources/org/uploadify/uploadify.swf')}}",
+                                'uploader' : "{{url('admin/upload')}}",
+                                'onUploadSuccess' : function(file, data, response) {
+                                    $('#cate_icon_img').append('<img src="/'+data+'" alt="" style="max-width: 350px; max-height:100px;">')
+                                    var imgValue = $('input[name=cate_icon]').val()
+                                    imgValue += imgValue ? ','+data : data
+                                    $('input[name=cate_icon]').val(imgValue);
+                                }
+                            });
+                        });
+                    </script>
+                    <style>
+                        .uploadify{display:inline-block;}
+                        .uploadify-button{border:none; border-radius:5px; margin-top:8px;}
+                        table.add_tab tr td span.uploadify-button-text{color: #FFF; margin:0;}
+                    </style>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td id="cate_icon_img">
+                </td>
+            </tr>
+            {{--<tr>
                 <th>分类标题：</th>
                 <td>
                     <input type="text" class="lg" name="cate_title">
@@ -78,7 +124,7 @@
                 <td>
                     <input type="text" class="sm" name="cate_order">
                 </td>
-            </tr>
+            </tr>--}}
             <tr>
                 <th></th>
                 <td>

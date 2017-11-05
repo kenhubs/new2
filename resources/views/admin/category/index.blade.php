@@ -3,7 +3,7 @@
         <!--面包屑导航 开始-->
 <div class="crumb_warp">
     <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-    <i class="fa fa-home"></i> <a href="{{url('admin/info')}}">首页</a> &raquo; 分类管理
+    <i class="fa fa-home"></i> <a href="{{url('admin/index')}}">首页</a> &raquo; 分类管理
 </div>
 <!--面包屑导航 结束-->
 
@@ -52,8 +52,7 @@
                     <th class="tc" width="5%">排序</th>
                     <th class="tc" width="5%">ID</th>
                     <th>分类名称</th>
-                    <th>标题</th>
-                    <th>查看次数</th>
+                    <th>唯一识别码</th>
                     <th>操作</th>
                 </tr>
 
@@ -66,8 +65,7 @@
                     <td>
                         <a href="#">{{$v->_cate_name}}</a>
                     </td>
-                    <td>{{$v->cate_title}}</td>
-                    <td>{{$v->cate_view}}</td>
+                    <td>{{$v->cate_uuid}}</td>
                     <td>
                         <a href="{{url('admin/category/'.$v->cate_id.'/edit')}}">修改</a>
                         <a href="javascript:;" onclick="delCate({{$v->cate_id}})">删除</a>

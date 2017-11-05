@@ -9,6 +9,70 @@
     <script type="text/javascript" src="{{asset('resources/org/layer/layer.js')}}"></script>
 </head>
 <body>
-@yield('content')
+<!--头部 开始-->
+<div class="top_box">
+    <div class="top_left">
+        <div class="logo">后台管理系统</div>
+        <ul>
+            {{--<li><a href="{{url('/')}}" target="_blank" class="active">首页</a></li>
+            <li><a href="{{url('admin/index')}}">管理页</a></li>--}}
+            <li><a href="{{url('admin/index')}}">首页</a></li>
+        </ul>
+    </div>
+    <div class="top_right">
+        <ul>
+            <li>管理员：admin</li>
+            <li><a href="{{url('admin/pass')}}">修改密码</a></li>
+            <li><a href="{{url('admin/quit')}}">退出</a></li>
+        </ul>
+    </div>
+</div>
+<!--头部 结束-->
+
+<!--左侧导航 开始-->
+<div class="menu_box">
+    <ul>
+        <li>
+            <h3><i class="fa fa-fw fa-clipboard"></i>内容管理</h3>
+            <ul class="sub_menu">
+                <li><a href="{{url('admin/category/create')}}"><i class="fa fa-fw fa-plus-square"></i>添加分类</a></li>
+                <li><a href="{{url('admin/category')}}"><i class="fa fa-fw fa-list-ul"></i>分类列表</a></li>
+                <li><a href="{{url('admin/article/create')}}"><i class="fa fa-fw fa-plus-square"></i>添加文章</a></li>
+                <li><a href="{{url('admin/article')}}"><i class="fa fa-fw fa-list-ul"></i>文章列表</a></li>
+            </ul>
+        </li>
+        <li>
+            <h3><i class="fa fa-fw fa-clipboard"></i>广告管理</h3>
+            <ul class="sub_menu">
+                <li><a href="{{url('admin/ad/create')}}" ><i class="fa fa-fw fa-plus-square"></i>添加广告</a></li>
+                <li><a href="{{url('admin/ad').'?type=1'}}"><i class="fa fa-fw fa-list-ul"></i>广告列表</a></li>
+            </ul>
+        </li>
+        <li>
+            <h3><i class="fa fa-fw fa-cog"></i>系统设置</h3>
+            <ul class="sub_menu" style="display: block;">
+                <li><a href="{{url('admin/links')}}"><i class="fa fa-fw fa-cubes"></i>友情链接</a></li>
+                {{--<li><a href="{{url('admin/navs')}}"><i class="fa fa-fw fa-navicon"></i>自定义导航</a></li>--}}
+                <li><a href="{{url('admin/config')}}"><i class="fa fa-fw fa-cogs"></i>网站配置</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<!--左侧导航 结束-->
+
+<!--主体部分 开始-->
+<div class="main_box" style="overflow:scroll">
+    @yield('content')
+
+</div>
+<!--主体部分 结束-->
+
+<!--底部 开始-->
+<div class="bottom_box">
+    CopyRight © {{date('Y',time())}}. Powered By <a href="{{env('APP_URL')}}">{{env('APP_URL')}}</a>.
+</div>
+<!--底部 结束-->
+
+@yield('js')
 </body>
 </html>

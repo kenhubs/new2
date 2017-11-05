@@ -52,10 +52,12 @@ class CategoryController extends CommonController
         $input = Input::except('_token');
         $rules = [
             'cate_name'=>'required',
+            'cate_uuid'=>'required'
         ];
 
         $message = [
             'cate_name.required'=>'分类名称不能为空！',
+            'cate_uuid.required'=>'分类唯一识别码不能为空！',
         ];
 
         $validator = Validator::make($input,$rules,$message);

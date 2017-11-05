@@ -1,60 +1,85 @@
 @extends('layouts.admin')
 @section('content')
-		<!--头部 开始-->
-<div class="top_box">
-	<div class="top_left">
-		<div class="logo">后台管理系统</div>
+		<!--面包屑导航 开始-->
+<div class="crumb_warp">
+	<!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
+	<i class="fa fa-home"></i> <a href="{{url('admin/info')}}">首页</a> &raquo; 系统基本信息
+</div>
+<!--面包屑导航 结束-->
+
+<!--结果集标题与导航组件 开始-->
+<div class="result_wrap">
+	<div class="result_title">
+		<h3>快捷操作</h3>
+	</div>
+	<div class="result_content">
+		<div class="short_wrap">
+			<a href="{{url('admin/category/create')}}"><i class="fa fa-plus"></i>新增分类</a>
+			<a href="{{url('admin/article/create')}}"><i class="fa fa-plus"></i>新增文章</a>
+			<a href="{{url('admin/ad/create')}}"><i class="fa fa-plus"></i>新增广告</a>
+			<a href="javascript:;" onclick="clearCache()">清楚缓存</a>
+		</div>
+	</div>
+</div>
+<!--结果集标题与导航组件 结束-->
+
+
+<div class="result_wrap">
+	<div class="result_title">
+		<h3>系统基本信息</h3>
+	</div>
+	<div class="result_content">
 		<ul>
-			<li><a href="{{url('/')}}" target="_blank" class="active">首页</a></li>
-			<li><a href="{{url('admin/info')}}" target="main">管理页</a></li>
+			<li>
+				<label>操作系统</label><span>{{PHP_OS}}</span>
+			</li>
+			<li>
+				<label>运行环境</label><span>{{$_SERVER['SERVER_SOFTWARE']}}</span>
+			</li>
+			<li>
+				<label>版本</label><span>v-1.0</span>
+			</li>
+			<li>
+				<label>上传附件限制</label><span><?php echo get_cfg_var ("upload_max_filesize")?get_cfg_var ("upload_max_filesize"):"不允许上传附件"; ?></span>
+			</li>
+			<li>
+				<label>北京时间</label><span><?php echo date('Y年m月d日 H时i分s秒')?></span>
+			</li>
+			<li>
+				<label>服务器域名/IP</label><span>{{$_SERVER['SERVER_NAME']}} [ {{$_SERVER['SERVER_ADDR']}} ]</span>
+			</li>
+			<li>
+				<label>Host</label><span>{{$_SERVER['SERVER_ADDR']}}</span>
+			</li>
 		</ul>
 	</div>
-	<div class="top_right">
+</div>
+
+
+<div class="result_wrap">
+	<div class="result_title">
+		<h3>使用帮助</h3>
+	</div>
+	<div class="result_content">
 		<ul>
-			<li>管理员：admin</li>
-			<li><a href="{{url('admin/pass')}}" target="main">修改密码</a></li>
-			<li><a href="{{url('admin/quit')}}">退出</a></li>
+			<li>
+				<label>官方交流网站：</label><span><a href="#">{{env('APP_URL')}}</a></span>
+			</li>
+			{{--<li>
+				<label>官方交流QQ群：</label><span><a href="#"><img border="0" src=""></a></span>
+			</li>--}}
 		</ul>
 	</div>
 </div>
-<!--头部 结束-->
-
-<!--左侧导航 开始-->
-<div class="menu_box">
-	<ul>
-		<li>
-			<h3><i class="fa fa-fw fa-clipboard"></i>内容管理</h3>
-			<ul class="sub_menu">
-				<li><a href="{{url('admin/category/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加分类</a></li>
-				<li><a href="{{url('admin/category')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>分类列表</a></li>
-				<li><a href="{{url('admin/article/create')}}" target="main"><i class="fa fa-fw fa-plus-square"></i>添加文章</a></li>
-				<li><a href="{{url('admin/article')}}" target="main"><i class="fa fa-fw fa-list-ul"></i>文章列表</a></li>
-			</ul>
-		</li>
-		<li>
-			<h3><i class="fa fa-fw fa-cog"></i>系统设置</h3>
-			<ul class="sub_menu" style="display: block;">
-				<li><a href="{{url('admin/links')}}" target="main"><i class="fa fa-fw fa-cubes"></i>友情链接</a></li>
-				<li><a href="{{url('admin/navs')}}" target="main"><i class="fa fa-fw fa-navicon"></i>自定义导航</a></li>
-				<li><a href="{{url('admin/config')}}" target="main"><i class="fa fa-fw fa-cogs"></i>网站配置</a></li>
-			</ul>
-		</li>
-	</ul>
-</div>
-<!--左侧导航 结束-->
-
-<!--主体部分 开始-->
-<div class="main_box">
-	<iframe src="{{url('admin/info')}}" frameborder="0" width="100%" height="100%" name="main"></iframe>
-</div>
-<!--主体部分 结束-->
-
-<!--底部 开始-->
-<div class="bottom_box">
-	CopyRight © {{date('Y',time())}}. Powered By <a href="{{env('APP_URL')}}">{{env('APP_URL')}}</a>.
-</div>
-<!--底部 结束-->
-
+<!--结果集列表组件 结束-->
 @endsection
-
+@section('js')
+	<script>
+		function clearCache(){
+			$.get("{{url('admin/cache/clear')}}",{},function(res){
+					layer.msg('清除成功！', {icon: 6});
+			})
+		}
+	</script>
+@endsection
 

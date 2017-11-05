@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Cache;
 
 class CommonController extends Controller
 {
@@ -20,5 +21,10 @@ class CommonController extends Controller
             $filepath = 'uploads/'.$newName;
             return $filepath;
         }
+    }
+
+    public function cacheClear(){
+        Cache::flush();
+        return response()->json(['code'=>200,'msg'=>'success']);
     }
 }

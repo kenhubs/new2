@@ -3,7 +3,7 @@
         <!--面包屑导航 开始-->
 <div class="crumb_warp">
     <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-    <i class="fa fa-home"></i> <a href="{{url('admin/index')}}">首页</a> &raquo; 文章管理
+    <i class="fa fa-home"></i> <a href="{{url('admin/index')}}">首页</a> &raquo; 广告管理 &raquo; 列表
 </div>
 <!--面包屑导航 结束-->
 
@@ -12,12 +12,12 @@
     <div class="result_wrap">
         <!--快捷导航 开始-->
         <div class="result_title">
-            <h3>文章列表</h3>
+            <h3>广告列表</h3>
         </div>
         <div class="result_content">
             <div class="short_wrap">
-                <a href="{{url('admin/article/create')}}"><i class="fa fa-plus"></i>添加文章</a>
-                <a href="{{url('admin/article')}}"><i class="fa fa-recycle"></i>全部文章</a>
+                <a href="{{url('admin/ad/create')}}"><i class="fa fa-plus"></i>添加广告</a>
+                <a href="{{url('admin/ad')}}"><i class="fa fa-recycle"></i>全部广告</a>
             </div>
         </div>
         <!--快捷导航 结束-->
@@ -29,23 +29,34 @@
                 <tr>
                     <th class="tc">ID</th>
                     <th>标题</th>
-                    <th>点击</th>
-                    <th>编辑</th>
+                    <th>广告</th>
+                    <th>投放区域</th>
                     <th>发布时间</th>
                     <th>操作</th>
                 </tr>
                 @foreach($data as $v)
                 <tr>
-                    <td class="tc">{{$v->art_id}}</td>
+                    <td class="tc">{{$v->ad_id}}</td>
                     <td>
-                        <a href="#">{{$v->art_title}}</a>
+                        <a href="#">{{$v->ad_title}}</a>
                     </td>
-                    <td>{{$v->art_view}}</td>
-                    <td>{{$v->art_editor}}</td>
-                    <td>{{date('Y-m-d',$v->art_time)}}</td>
+                    @if($v->ad_type == 1)
+                        <td>{{$v->ad_text}}</td>
+                        <td>----</td>
+                    @else
+                        <td>
+                            @foreach(explode(',',$v->ad_img) as $vv)
+                                <img alt="" style="max-width: 350px; max-height:100px;" src="/{{$vv}}">
+                            @endforeach
+                        </td>
+                        <td>
+                            <a href="#">{{$v->ad_position == 1 ? '轮播': '列表'}}</a>
+                        </td>
+                    @endif
+                    <td>{{date('Y-m-d H:i:s',$v->ad_created)}}</td>
                     <td>
-                        <a href="{{url('admin/article/'.$v->art_id.'/edit')}}">修改</a>
-                        <a href="javascript:;" onclick="delArt({{$v->art_id}})">删除</a>
+                        <a href="{{url('admin/ad/'.$v->ad_id.'/edit')}}">修改</a>
+                        <a href="javascript:;" onclick="delArt({{$v->ad_id}})">删除</a>
                     </td>
                 </tr>
                 @endforeach
@@ -69,10 +80,10 @@
 <script>
     //删除分类
     function delArt(art_id) {
-        layer.confirm('您确定要删除这篇文章吗？', {
+        layer.confirm('您确定要删除吗？', {
             btn: ['确定','取消'] //按钮
         }, function(){
-            $.post("{{url('admin/article/')}}/"+art_id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
+            $.post("{{url('admin/ad')}}/"+art_id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
                 if(data.status==0){
                     location.href = location.href;
                     layer.msg(data.msg, {icon: 6});
@@ -80,7 +91,6 @@
                     layer.msg(data.msg, {icon: 5});
                 }
             });
-//            layer.msg('的确很重要', {icon: 1});
         }, function(){
 
         });
