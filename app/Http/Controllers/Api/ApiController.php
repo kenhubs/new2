@@ -116,17 +116,30 @@ class ApiController extends Controller
     //============================
 
     public function artListHandle($cate_uuid,$need_fields){
-        $data = [];
+        $data = [
+            'data' => [],
+            'page' => [
+                'total' => 0,
+                'perPage'=>10,
+                'currentPage'=>1
+            ]
+        ];
         $cate_id = Category::where('cate_uuid',$cate_uuid)->first()->cate_id;
         $art = Article::orderBy('art_id','desc')->where('cate_id',$cate_id)->paginate(10);
         if($art){
+            $data['page'] = [
+                'total'      => $art->total(),
+                'perPage'    => $art->perPage(),
+                'currentPage'=> $art->currentPage()
+            ];
             foreach($art as $v){
                 $temp = [];
                 foreach($need_fields as $vv){
                     $key = 'art_'.$vv;
                     $temp[$vv] = $vv == 'time' ? date('Y-m-d',$v->$key) : $v->$key;
                 }
-                $data[] = $temp;
+                //$data[] = $temp;
+                $data['data'][] = $temp;
             }
         }
         return $data;
