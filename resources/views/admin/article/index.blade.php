@@ -29,7 +29,8 @@
                 <tr>
                     <th class="tc">ID</th>
                     <th>标题</th>
-                    <th>点击</th>
+                    <th>缩略图</th>
+                    <th>分类</th>
                     <th>编辑</th>
                     <th>发布时间</th>
                     <th>操作</th>
@@ -40,7 +41,8 @@
                     <td>
                         <a href="#">{{$v->art_title}}</a>
                     </td>
-                    <td>{{$v->art_view}}</td>
+                    <td style="text-align: center"><img src="{{url($v->art_thumb)}}" alt="" height="50px"></td>
+                    <td>{{$v->cate->cate_name}}</td>
                     <td>{{$v->art_editor}}</td>
                     <td>{{date('Y-m-d',$v->art_time)}}</td>
                     <td>

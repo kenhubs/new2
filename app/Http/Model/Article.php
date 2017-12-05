@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Model;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
@@ -10,4 +9,8 @@ class Article extends Model
     protected $primaryKey='art_id';
     public $timestamps=false;
     protected $guarded=[];
+
+    public function cate(){
+        return  $this->belongsTo("App\Http\Model\Category","cate_id","cate_id");
+    }
 }

@@ -17,7 +17,7 @@
 			<a href="{{url('admin/category/create')}}"><i class="fa fa-plus"></i>新增分类</a>
 			<a href="{{url('admin/article/create')}}"><i class="fa fa-plus"></i>新增文章</a>
 			<a href="{{url('admin/ad/create')}}"><i class="fa fa-plus"></i>新增广告</a>
-			<a href="javascript:;" onclick="clearCache()">清楚缓存</a>
+			<a href="javascript:;" onclick="clearCache()">清除缓存</a>
 		</div>
 	</div>
 </div>
