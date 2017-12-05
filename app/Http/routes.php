@@ -27,7 +27,7 @@ Route::group(['middleware' => ['web'],'prefix'=>'api','namespace'=>'Api'], funct
     Route::get('/news/list', 'ApiController@newsList');
     Route::get('/news/{id}', 'ApiController@newsDetail');
     Route::get('/culture/list', 'ApiController@cultureList');
-    Route::get('/culture/{id}', 'ApiController@culture');
+    Route::get('/culture/{id}', 'ApiController@cultureDetail');
     Route::get('/baike/list', 'ApiController@baikeList');
     Route::get('/baike/{id}', 'ApiController@baikeDetail');
     Route::get('/convenience/list', 'ApiController@convenienceList');
