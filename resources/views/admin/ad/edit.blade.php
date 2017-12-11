@@ -1,5 +1,10 @@
 @extends('layouts.admin')
 @section('content')
+<style>
+    .adHide{
+        display: none;
+    }
+</style>
         <!--面包屑导航 开始-->
 <div class="crumb_warp">
     <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
@@ -33,7 +38,7 @@
 <!--结果集标题与导航组件 结束-->
 
 <div class="result_wrap">
-    <form action="{{url('admin/article/'.$field->art_id)}}" method="post">
+    <form action="{{url('admin/ad/'.$field->ad_id)}}" method="post">
         <input type="hidden" name="_method" value="put">
         <input type="hidden" name="ad_type" value="{{$field->ad_type}}">
         {{csrf_field()}}
@@ -65,8 +70,26 @@
                 </td>
             </tr>
             @else
+            <tr class="adPosition">
+                <th><i class="require">*</i> 投放位置：</th>
+                <td>
+                    <input type="radio" class="lg" name="ad_position" value="0" @if($field->ad_position==0) checked @endif onclick="app.changePosition(0)">首页
+                    <input type="radio" class="lg" name="ad_position" value="1" @if($field->ad_position==1) checked @endif onclick="app.changePosition(1)">轮播
+                    <input type="radio" class="lg" name="ad_position" value="2" @if($field->ad_position==2) checked @endif onclick="app.changePosition(2)">列表
+                </td>
+            </tr>
+            <tr class="adCate @if($field->ad_position!=2) adHide @endif">
+                <th></th>
+                <td>
+                    <select name="ad_cate_id">
+                        @foreach($cate as $d)
+                            <option value="{{$d->cate_id}}" @if($field->ad_cate_id==$d->cate_id) selected @endif>{{$d->_cate_name}}</option>
+                        @endforeach
+                    </select>
+                </td>
+            </tr>
             <tr class="adContent">
-                <th>缩略图：</th>
+                <th>广告图片：</th>
                 <td>
                     <input type="hidden" size="50" name="ad_img" value="{{$field->ad_img}}">
                     <input id="file_upload" name="file_upload" type="file" multiple="true">
@@ -146,6 +169,13 @@
                     $('.adType').eq(type-1).addClass('adActive').siblings().removeClass('adActive')
                     $('.adContent').eq(type-1).removeClass('adHide')
                     $('.adContent').eq(2-type).addClass('adHide')
+                },
+                changePosition(posType){
+                    if(posType == 2){
+                        $('.adCate').removeClass('adHide')
+                    }else{
+                        $('.adCate').addClass('adHide')
+                    }
                 },
                 checkData(){
                     _this = this

@@ -22,7 +22,7 @@ class ApiController extends Controller
         return response()->json($res);
     }
     public function noticeDetail($id){
-        return response()->json($this->getArtDetail($id,['id','title','thumb','content']));
+        return response()->json($this->getArtDetail($id,['id','title','thumb','content','ad_title','ad_img']));
     }
     //社区新闻
     public function newsList(){
@@ -33,7 +33,7 @@ class ApiController extends Controller
         return response()->json($res);
     }
     public function newsDetail($id){
-        return response()->json($this->getArtDetail($id,['id','title','editor','thumb','content']));
+        return response()->json($this->getArtDetail($id,['id','title','editor','thumb','content','ad_title','ad_img']));
     }
     //社区文萃
     public function cultureList(){
@@ -44,7 +44,7 @@ class ApiController extends Controller
         return response()->json($res);
     }
     public function cultureDetail($id){
-        return response()->json($this->getArtDetail($id,['id','title','editor','area','thumb','content','time']));
+        return response()->json($this->getArtDetail($id,['id','title','editor','area','thumb','content','time','ad_title','ad_img']));
     }
 
     //社区百科
@@ -56,7 +56,7 @@ class ApiController extends Controller
         return response()->json($res);
     }
     public function baikeDetail($id){
-        return response()->json($this->getArtDetail($id,['id','title','thumb','content','time']));
+        return response()->json($this->getArtDetail($id,['id','title','thumb','content','time','ad_title','ad_img']));
     }
 
     //社区便民
@@ -68,7 +68,7 @@ class ApiController extends Controller
         return response()->json($res);
     }
     public function convenienceDetail($id){
-        return response()->json($this->getArtDetail($id,['id','title','thumb','content','time']));
+        return response()->json($this->getArtDetail($id,['id','title','thumb','content','time','ad_title','ad_img']));
     }
 
     //智慧商圈 分类列表
@@ -97,7 +97,7 @@ class ApiController extends Controller
         return response()->json($res);
     }
     public function businessSubDetail($id){
-        return response()->json($this->getArtDetail($id,['id','title','thumb','address','phone','content','time']));
+        return response()->json($this->getArtDetail($id,['id','title','thumb','address','phone','content','time','ad_title','ad_img']));
     }
 
     //广告
@@ -107,8 +107,8 @@ class ApiController extends Controller
     public function adLunbo(){
         return response()->json($this->adHandle(2,1,['id','title','img']));
     }
-    public function adList(){
-        return response()->json($this->adHandle(2,2,['id','title','img']));
+    public function adList($cate_id=0){
+        return response()->json($this->adHandle(2,2,$cate_id,['id','title','img']));
     }
 
 
@@ -158,18 +158,17 @@ class ApiController extends Controller
         });
         return $res;
     }
-    public function adHandle($ad_type,$position,$need_fields){
-        $res = Cache::remember('api_ad_'.$ad_type.'_'.$position, 120, function() use($ad_type,$position,$need_fields){
+    public function adHandle($ad_type,$position,$cate_id=0,$need_fields){
+        $res = Cache::remember('api_ad_'.$ad_type.'_'.$position.'_'.$cate_id, 120, function() use($ad_type,$position,$need_fields){
             $data = [];
             $ads = Ad::orderBy('ad_id','desc')->where('ad_type',$ad_type)->where('ad_position',$position)->get();
-            //dd($ads);
             if($ads){
                 foreach($ads as $v){
                     $temp = [];
                     foreach($need_fields as $vv){
                         $key = 'ad_'.$vv;
-
                         $temp[$vv] = $vv == 'time' ? date('Y-m-d',$v->$key) : $v->$key;
+                        //$temp[$vv] = $vv == 'time' ? date('Y-m-d',$v->$key) : ($vv == 'img' ? explode(',',$v->$key) : $v->$key);
                     }
                     $data[] = $temp;
                 }

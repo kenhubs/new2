@@ -138,7 +138,47 @@
                     </style>
                 </td>
             </tr>
-
+            <tr>
+                <th>广告标题：</th>
+                <td>
+                    <input type="text" class="sm" name="art_ad_title">
+                </td>
+            </tr>
+            <tr>
+                <th>广告图片：</th>
+                <td>
+                    <input type="hidden" size="50" name="art_ad_img">
+                    <input id="file_upload_ad" name="file_upload_ad" type="file" multiple="true">
+                    {{--<script src="{{asset('resources/org/uploadify/jquery.uploadify.min.js')}}" type="text/javascript"></script>
+                    <link rel="stylesheet" type="text/css" href="{{asset('resources/org/uploadify/uploadify.css')}}">--}}
+                    <script type="text/javascript">
+                        <?php $timestamp = time();?>
+                        $(function() {
+                            $('#file_upload_ad').uploadify({
+                                'buttonText' : '图片上传',
+                                'formData'     : {
+                                    'timestamp' : '<?php echo $timestamp;?>',
+                                    '_token'     : "{{csrf_token()}}"
+                                },
+                                'swf'      : "{{asset('resources/org/uploadify/uploadify.swf')}}",
+                                'uploader' : "{{url('admin/upload')}}",
+                                'onUploadSuccess' : function(file, data, response) {
+                                    $('#art_ad_img').append('<img src="/'+data+'" alt="" style="max-width: 350px; max-height:100px;">')
+                                    var imgValue = $('input[name=art_ad_img]').val()
+                                    imgValue += imgValue ? ','+data : data
+                                    $('input[name=art_ad_img]').val(imgValue);
+//
+                                }
+                            });
+                        });
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td id="art_ad_img">
+                </td>
+            </tr>
             <tr>
                 <th></th>
                 <td>

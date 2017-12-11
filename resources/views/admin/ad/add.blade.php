@@ -72,8 +72,19 @@
             <tr class="adPosition adHide">
                 <th><i class="require">*</i> 投放位置：</th>
                 <td>
-                    <input type="radio" class="lg" name="ad_position" value="1">轮播
-                    <input type="radio" class="lg" name="ad_position" value="2" checked>列表
+                    <input type="radio" class="lg" name="ad_position" value="0" onclick="app.changePosition(0)">首页
+                    <input type="radio" class="lg" name="ad_position" value="1" onclick="app.changePosition(1)">轮播
+                    <input type="radio" class="lg" name="ad_position" value="2" checked onclick="app.changePosition(2)">列表
+                </td>
+            </tr>
+            <tr class="adCate adHide">
+                <th></th>
+                <td>
+                    <select name="ad_cate_id">
+                        @foreach($data as $d)
+                            <option value="{{$d->cate_id}}">{{$d->_cate_name}}</option>
+                        @endforeach
+                    </select>
                 </td>
             </tr>
             <tr class="adContent adHide">
@@ -142,13 +153,22 @@
                 this.require = type==1 ? ['ad_title','ad_text'] : ['ad_title','ad_img']
                 if(type==2){
                     $('.adPosition').removeClass('adHide')
+                    $('.adCate').removeClass('adHide')
                 }else{
                     $('.adPosition').addClass('adHide')
+                    $('.adCate').addClass('adHide')
                 }
                 $('input[name=ad_type]').val(type)
                 $('.adType').eq(type-1).addClass('adActive').siblings().removeClass('adActive')
                 $('.adContent').eq(type-1).removeClass('adHide')
                 $('.adContent').eq(2-type).addClass('adHide')
+            },
+            changePosition(posType){
+                if(posType == 2){
+                    $('.adCate').removeClass('adHide')
+                }else{
+                    $('.adCate').addClass('adHide')
+                }
             },
             checkData(){
                 _this = this

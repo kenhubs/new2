@@ -50,7 +50,7 @@
                             @endforeach
                         </td>
                         <td>
-                            <a href="#">{{$v->ad_position == 1 ? '轮播': '列表'}}</a>
+                            <a href="#">{{$v->ad_position == 0 ? '首页':($v->ad_position == 1 ?'轮播': $cate[$v->ad_cate_id])}}</a>
                         </td>
                     @endif
                     <td>{{date('Y-m-d H:i:s',$v->ad_created)}}</td>
@@ -79,14 +79,14 @@
 
 <script>
     //删除分类
-    function delArt(art_id) {
+    function delArt(ad_id) {
         layer.confirm('您确定要删除吗？', {
             btn: ['确定','取消'] //按钮
         }, function(){
-            $.post("{{url('admin/ad')}}/"+art_id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
+            $.post("{{url('admin/ad')}}/"+ad_id,{'_method':'delete','_token':"{{csrf_token()}}"},function (data) {
                 if(data.status==0){
-                    location.href = location.href;
                     layer.msg(data.msg, {icon: 6});
+                    location.href = location.href;
                 }else{
                     layer.msg(data.msg, {icon: 5});
                 }

@@ -8,7 +8,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Model\Ad;
-
+use App\Http\Model\Category;
 class AdController extends CommonController
 {
     /**
@@ -19,7 +19,13 @@ class AdController extends CommonController
     public function index()
     {
         $data = Ad::orderBy('ad_id','desc')->paginate(10);
-        return view('admin.ad.index',compact('data'));
+        $cate = [];
+        $cateAll = Category::all();
+        foreach($cateAll as $v){
+            $cate[$v->cate_id] = $v->cate_name;
+        }
+        //dd($cate,$data);
+        return view('admin.ad.index',compact('data','cate'));
     }
 
     /**
@@ -29,7 +35,8 @@ class AdController extends CommonController
      */
     public function create()
     {
-        return view('admin.ad.add');
+        $data = (new Category)->tree();
+        return view('admin.ad.add',compact('data'));
     }
 
     /**
@@ -41,6 +48,12 @@ class AdController extends CommonController
     public function store()
     {
         $input = Input::except('_token');
+        if($input['ad_type']==1){
+            $input['ad_cate_id']=0;
+            $input['ad_position']=0;
+        }else{
+            if($input['ad_position']!=2) $input['ad_cate_id']=0;
+        }
         $input['ad_created'] = time();
         Ad::create($input);
         return redirect('admin/ad');
@@ -66,7 +79,8 @@ class AdController extends CommonController
     public function edit($ad_id)
     {
         $field = Ad::find($ad_id);
-        return view('admin.ad.edit',compact('field'));
+        $cate = (new Category)->tree();
+        return view('admin.ad.edit',compact('field','cate'));
     }
 
     /**
@@ -76,9 +90,21 @@ class AdController extends CommonController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($ad_id)
     {
-        //
+        $input = Input::except('_token','_method');
+        if($input['ad_type']==1){
+            $input['ad_cate_id']=0;
+            $input['ad_position']=0;
+        }else{
+            if($input['ad_position']!=2) $input['ad_cate_id']=0;
+        }
+        $re = Ad::where('ad_id',$ad_id)->update($input);
+        if($re){
+            return redirect('admin/ad');
+        }else{
+            return back()->with('errors','广告更新失败，请稍后重试！');
+        }
     }
 
     /**
@@ -87,8 +113,20 @@ class AdController extends CommonController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($ad_id)
     {
-        //
+        $re = Ad::where('ad_id',$ad_id)->delete();
+        if($re){
+            $data = [
+                'status' => 0,
+                'msg' => '广告删除成功！',
+            ];
+        }else{
+            $data = [
+                'status' => 1,
+                'msg' => '广告删除失败，请稍后重试！',
+            ];
+        }
+        return $data;
     }
 }
