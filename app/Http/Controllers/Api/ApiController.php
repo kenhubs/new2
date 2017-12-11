@@ -102,10 +102,10 @@ class ApiController extends Controller
 
     //广告
     public function adText(){
-        return response()->json($this->adHandle(1,2,['id','title','text']));
+        return response()->json($this->adHandle(1,0,0,['id','title','text']));
     }
     public function adLunbo(){
-        return response()->json($this->adHandle(2,1,['id','title','img']));
+        return response()->json($this->adHandle(2,1,0,['id','title','img']));
     }
     public function adList($cate_id=0){
         return response()->json($this->adHandle(2,2,$cate_id,['id','title','img']));
@@ -159,9 +159,9 @@ class ApiController extends Controller
         return $res;
     }
     public function adHandle($ad_type,$position,$cate_id=0,$need_fields){
-        $res = Cache::remember('api_ad_'.$ad_type.'_'.$position.'_'.$cate_id, 120, function() use($ad_type,$position,$need_fields){
+        $res = Cache::remember('api_ad_'.$ad_type.'_'.$position.'_'.$cate_id, 120, function() use($ad_type,$position,$cate_id,$need_fields){
             $data = [];
-            $ads = Ad::orderBy('ad_id','desc')->where('ad_type',$ad_type)->where('ad_position',$position)->get();
+            $ads = Ad::orderBy('ad_id','desc')->where('ad_type',$ad_type)->where('ad_position',$position)->where('ad_cate_id',$cate_id)->get();
             if($ads){
                 foreach($ads as $v){
                     $temp = [];
