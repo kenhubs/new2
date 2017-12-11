@@ -40,6 +40,7 @@ Route::group(['middleware' => ['web'],'prefix'=>'api','namespace'=>'Api'], funct
 
     //广告
     Route::get('/ad/lunbo', 'ApiController@adLunbo');//轮播
+    Route::get('/ad/index', 'ApiController@adIndex');//首页广告
     Route::get('/ad/list/{cate_id}', 'ApiController@adList');//列表页广告
     Route::get('/ad/text', 'ApiController@adText');//文字广告
 });

@@ -104,6 +104,9 @@ class ApiController extends Controller
     public function adText(){
         return response()->json($this->adHandle(1,0,0,['id','title','text']));
     }
+    public function adIndex(){
+        return response()->json($this->adHandle(2,0,0,['id','title','text']));
+    }
     public function adLunbo(){
         return response()->json($this->adHandle(2,1,0,['id','title','img']));
     }
@@ -164,13 +167,16 @@ class ApiController extends Controller
             $ads = Ad::orderBy('ad_id','desc')->where('ad_type',$ad_type)->where('ad_position',$position)->where('ad_cate_id',$cate_id)->get();
             if($ads){
                 foreach($ads as $v){
-                    $temp = [];
-                    foreach($need_fields as $vv){
-                        $key = 'ad_'.$vv;
-                        $temp[$vv] = $vv == 'time' ? date('Y-m-d',$v->$key) : $v->$key;
-                        //$temp[$vv] = $vv == 'time' ? date('Y-m-d',$v->$key) : ($vv == 'img' ? explode(',',$v->$key) : $v->$key);
+                    if($ad_type==2 && $position==1){
+                        $data[] = $v->ad_img;
+                    }else{
+                        $temp = [];
+                        foreach($need_fields as $vv){
+                            $key = 'ad_'.$vv;
+                            $temp[$vv] = $vv == 'time' ? date('Y-m-d',$v->$key) : $v->$key;
+                        }
+                        $data[] = $temp;
                     }
-                    $data[] = $temp;
                 }
             }
             return $data;
