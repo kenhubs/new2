@@ -73,7 +73,7 @@
             <tr class="adPosition">
                 <th><i class="require">*</i> 投放位置：</th>
                 <td>
-                    <input type="radio" class="lg" name="ad_position" value="0" @if($field->ad_position==0) checked @endif onclick="app.changePosition(0)">首页
+                    <input type="radio" class="lg" name="ad_position" value="0" @if($field->ad_position==0) checked @endif onclick="app.changePosition(0)">启动页
                     <input type="radio" class="lg" name="ad_position" value="1" @if($field->ad_position==1) checked @endif onclick="app.changePosition(1)">轮播
                     <input type="radio" class="lg" name="ad_position" value="2" @if($field->ad_position==2) checked @endif onclick="app.changePosition(2)">列表
                 </td>

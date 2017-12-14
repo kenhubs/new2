@@ -50,7 +50,7 @@
                             @endforeach
                         </td>
                         <td>
-                            <a href="#">{{$v->ad_position == 0 ? '首页':($v->ad_position == 1 ?'轮播': $cate[$v->ad_cate_id])}}</a>
+                            <a href="#">{{$v->ad_position == 0 ? '启动页':($v->ad_position == 1 ?'轮播': $cate[$v->ad_cate_id])}}</a>
                         </td>
                     @endif
                     <td>{{date('Y-m-d H:i:s',$v->ad_created)}}</td>
