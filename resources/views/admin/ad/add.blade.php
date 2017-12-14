@@ -98,6 +98,7 @@
                         <?php $timestamp = time();?>
                         $(function() {
                             $('#file_upload').uploadify({
+                                multi: false,
                                 'buttonText' : '图片上传',
                                 'formData'     : {
                                     'timestamp' : '<?php echo $timestamp;?>',

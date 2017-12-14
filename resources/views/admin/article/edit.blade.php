@@ -163,6 +163,7 @@
                         $(function() {
                             var isClear = false
                             $('#file_upload_ad').uploadify({
+                                multi: false,
                                 'buttonText' : '图片上传',
                                 'formData'     : {
                                     'timestamp' : '<?php echo $timestamp;?>',
