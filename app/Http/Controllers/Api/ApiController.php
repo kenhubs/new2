@@ -105,7 +105,7 @@ class ApiController extends Controller
         return response()->json($this->adHandle(1,0,0,['id','title','text']));
     }
     public function adIndex(){
-        return response()->json($this->adHandle(2,0,0,['id','title','text']));
+        return response()->json($this->adHandle(2,0,0,['id','title','img']));
     }
     public function adLunbo(){
         return response()->json($this->adHandle(2,1,0,['id','title','img']));
