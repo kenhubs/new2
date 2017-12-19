@@ -1,22 +1,23 @@
 @extends('layouts.admin')
 @section('content')
         <!--面包屑导航 开始-->
-{{--<div class="crumb_warp">
+<div class="crumb_warp">
+    <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
     <i class="fa fa-home"></i> <a href="{{url('admin/index')}}">首页</a> &raquo; 文章管理
-</div>--}}
+</div>
 <!--面包屑导航 结束-->
 
 <!--搜索结果页面 列表 开始-->
 <form action="#" method="post">
     <div class="result_wrap">
         <!--快捷导航 开始-->
-        {{--<div class="result_title">
+        <div class="result_title">
             <h3>文章列表</h3>
-        </div>--}}
+        </div>
         <div class="result_content">
             <div class="short_wrap">
                 <a href="{{url('admin/article/create')}}"><i class="fa fa-plus"></i>添加文章</a>
-                {{--<a href="{{url('admin/article')}}"><i class="fa fa-recycle"></i>全部文章</a>--}}
+                <a href="{{url('admin/article')}}"><i class="fa fa-recycle"></i>全部文章</a>
             </div>
         </div>
         <!--快捷导航 结束-->

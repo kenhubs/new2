@@ -56,6 +56,7 @@ Route::group(['middleware' => ['web','admin.login'],'prefix'=>'admin','namespace
     Route::resource('category', 'CategoryController');
 
     Route::resource('article', 'ArticleController');
+    Route::get('article/list/{cate_id}', 'ArticleController@getArticleByCateId');
 
     Route::post('links/changeorder', 'LinksController@changeOrder');
     Route::resource('links', 'LinksController');

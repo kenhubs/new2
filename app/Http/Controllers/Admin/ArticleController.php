@@ -93,4 +93,11 @@ class ArticleController extends CommonController
         }
         return $data;
     }
+
+    public function getArticleByCateId($cate_id)
+    {
+        $data = Article::orderBy('art_id','desc')->where('cate_id',$cate_id)->paginate(10);
+        return view('admin.article.index',compact('data'));
+    }
+
 }
