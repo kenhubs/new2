@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>社区公告</title>
+    <link rel="stylesheet" type="text/css" href="css/aui.css" />
+    <link rel="stylesheet" type="text/css" href="css/aui-pull-refresh.css" />
+</head>
+<style>
+    .card-time-footer{
+        font-size: 0.4rem;
+        float: right;
+        position: absolute;
+        right: 1rem;
+        bottom: 0.5rem;
+        color: #999999;
+    }
+    .positon-realtive{
+        position: relative;
+    }
+</style>
+<body>
+<section class="aui-refresh-content">
+    <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-media-list" id="aui-list-notice">
+
+        </ul>
+    </div>
+</section>
+</body>
+<script type="text/javascript" src="script/aui-lazyload.js" ></script>
+<script src="script/api.js"></script>
+<script type="text/javascript" src="script/jquery.js"></script>
+<script src="script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="script/config.js"></script>
+<script type="text/javascript" src="script/aui-toast.js" ></script>
+<script type="text/javascript" src="script/scroll.js" ></script>
+<script type="text/javascript">
+    (function ($) {
+        $.getUrlParam = function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+    })(jQuery);
+    var num = 1;
+    $(function () {
+        requestData(num);
+    });
+    //懒加载
+    new auiLazyload({
+        errorImage:'../image/error-img.png'
+    });
+    window.onscroll = function () {
+        //监听事件内容
+        if (getScrollHeight() == getWindowHeight() + getDocumentTop()) {
+            num++;
+            //当滚动条到底时,这里是触发内容
+            showDefault('loading');
+            requestData(num);
+        }
+    };
+    //下拉刷新
+    var pullRefresh = new auiPullToRefresh({
+        container: document.querySelector('.aui-refresh-content'),
+        triggerDistance: 100
+    },function(ret){
+        if(ret.status=="success"){
+            setTimeout(function(){
+                requestData(1);
+                pullRefresh.cancelLoading(); //刷新成功后调用此方法隐藏
+            },1500)
+        }
+    });
+
+    function requestData(page) {
+        console.log($.getUrlParam('id'));
+        var li="";
+        var list_notice=$("#aui-list-notice");
+        $.ajax({
+            async:false,
+            cache:false,
+            type: 'get',
+            dataType : "json",
+            url: dataServiceLocation+"/api/business/sub/list/"+$.getUrlParam('id')+"?page="+page,
+            error: function () {
+                alert('请求失败');
+            },
+            success:function(data) {
+                toast.hide();
+                console.log(data);
+
+                if(data.data.length == 0){
+                    showDefault('fail');
+                }else{
+                    showDefault('success');
+                    $.each(data.data,function (i,item) {
+                        var image = dataServiceLocation+"/"+item.thumb;
+                        li +="<li data-id='"+item.id+"' class='aui-list-item border-bottom-10 card_link' style='border-bottom: 10px solid #f2f2f2;'>"
+                            +"<a href='sub_etail.html?id="+item.id+"'><div class='aui-media-list-item-inner positon-realtive'>"
+                            +"<div class='aui-list-item-media' style='width:6rem'>"
+                            +"<img src='"+image+"' data-src='"+image+"'>"
+                            +"</div>"
+                            +"<div class='aui-list-item-inner'>"
+                            +"<div class='aui-list-item-text'>"
+                            +"<div class='aui-list-item-title'>"+item.title+"</div>"
+                            +"</div>"
+                            +"<div class='card-time-footer'>"+item.time+"</div>"
+                            +"</div>"
+                            +"</div></a>"
+                            +"</li>";
+                    });
+                    list_notice.empty().append(li);
+                }
+            }
+        })
+    }
+</script>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+	<title>首页</title>
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+	<link rel="stylesheet" type="text/css" href="css/aui.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.mloading.css" />
+	<link rel="stylesheet" href="css/mescroll.min.css">
+	<link rel="stylesheet" href="css/mescroll-option.css">
+	<link rel="stylesheet" type="text/css" href="css/aui-pull-refresh.css" />
+	<style>
+		header {
+		}
+		.aui-searchbar {
+			background: transparent;
+		}
+		.aui-bar-nav .aui-searchbar-input {
+			background-color: #ffffff;
+		}
+		.aui-bar-light .aui-searchbar-input {
+			background-color: #f5f5f5;
+		}
+
+		.bg-dark {
+			background: #333333 !important;
+		}
+		.aui-slide-node img {
+			width: 100%;
+			height: 100%;
+		}
+
+		.aui-grid .aui-row-img-wt i { width:38px; height:38px; display:inline-block; margin:0 auto}
+		.aui-col-xs-five{
+			width: 20%;
+		}
+		.custom-small-font-8{
+			transform: scale(0.80);
+		}
+		.advert{
+			width: 100%;
+			height: 100%;
+			display: none;
+			position: fixed;
+			z-index: 99;
+		}
+		.second{
+			position: fixed;
+			z-index: 100;
+			top:10px;
+			right:10px;
+			padding: 5px;
+			background-color: #999999;
+			color: #ffffff;
+		}
+	</style>
+	<link rel="stylesheet" href="css/aui-flex.css">
+	<link rel="stylesheet" href="css/aui-slide.css">
+</head>
+<body class="aui-refresh-content" style="background-color:#f2f2f2;">
+	<img src="image/banner1.jpg" class="advert">
+	<span class="second"></span>
+	<div style="padding: 10px 10px 0 10px">
+		<div id="aui-slide">
+			<div class="aui-slide-wrap house-banner" >
+
+			</div>
+			<div class="aui-slide-page-wrap"><!--分页容器--></div>
+		</div>
+		<div id="aui-slide2">
+			<div class="aui-slide-wrap" >
+				<div class="aui-slide-node" style="background: #f2f2f2;">
+					<div class="aui-grid" style="background: #f2f2f2;">
+						<div class="aui-row aui-row-img-wt house-icon" >
+							<!--<div class="aui-col-xs-five aui-flex-auto ">
+								<i class="aui-iconfont "><img src="image/icon/index1.png" alt=""></i>
+								<div class="aui-grid-label custom-small-font-8">餐饮美食</div>
+							</div>
+							<div class="aui-col-xs-five aui-flex-auto ">
+								<i class="aui-iconfont "><img src="image/icon/index2.png" alt=""></i>
+								<div class="aui-grid-label custom-small-font-8">休闲娱乐</div>
+							</div>
+							<div class="aui-col-xs-five aui-flex-auto ">
+								<i class="aui-iconfont "><img src="image/icon/index3.png" alt=""></i>
+								<div class="aui-grid-label custom-small-font-8">生活购物</div>
+							</div>
+							<div class="aui-col-xs-five aui-flex-auto ">
+								<i class="aui-iconfont "><img src="image/icon/index4.png" alt=""></i>
+								<div class="aui-grid-label custom-small-font-8">生鲜特产</div>
+							</div>
+							<div class="aui-col-xs-five aui-flex-auto ">
+								<div class="aui-badge">88</div>
+								<i class="aui-iconfont "><img src="image/icon/index5.png" alt=""></i>
+								<div class="aui-grid-label custom-small-font-8">教育培训</div>
+							</div>
+							<div class="aui-col-xs-five aui-flex-auto">
+								<i class="aui-iconfont "><img src="image/icon/index6.png" alt=""></i>
+								<div class="aui-grid-label custom-small-font-8">房产租赁</div>
+							</div>
+							<div class="aui-col-xs-five aui-flex-auto ">
+								<i class="aui-iconfont "><img src="image/icon/index7.png" alt=""></i>
+								<div class="aui-grid-label custom-small-font-8">美容养护</div>
+							</div>
+							<div class="aui-col-xs-five aui-flex-auto ">
+								<i class="aui-iconfont "><img src="image/icon/index8.png" alt=""></i>
+								<div class="aui-grid-label custom-small-font-8">家居建材</div>
+							</div>
+							<div class="aui-col-xs-five aui-flex-auto ">
+								<i class="aui-iconfont "><img src="image/icon/index9.png" alt=""></i>
+								<div class="aui-grid-label custom-small-font-8">社区二手</div>
+							</div>
+							<div class="aui-col-xs-five aui-flex-auto ">
+								<div class="aui-badge">88</div>
+								<i class="aui-iconfont "><img src="image/icon/index10.png" alt=""></i>
+								<div class="aui-grid-label custom-small-font-8">家政服务</div>
+							</div>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<section class="aui-content aui-border-t " style="background-color: #fff;">
+		<div class="aui-flex-col aui-flex-center aui-border-tb">
+			<img class="index_banner" src="image/banner3.jpg"  style="height: 60px;width: 100%;">
+		</div>
+	</section>
+	<div style=" background:#efefef"></div>
+	<div class="aui-card-list-content aui-border-b aui-border-t aui-padded-10 ">
+		<ul class="aui-list aui-media-list text-banner">
+			<li class="aui-list-item" style="margin-bottom: 10px">
+				<a href="">
+					<div class="aui-media-list-item-inner">
+						<div class="aui-list-item-inner">
+							<div class="aui-list-item-text">
+								<div class="aui-info-item aui-font-size-12">正在加载...</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+</body>
+<script type="text/javascript" src="script/api.js" ></script>
+<script src="script/aui-pull-refresh.js"></script>
+<script type="text/javascript" src="script/aui-tab.js" ></script>
+<script type="text/javascript" src="script/aui-slide.js"></script>
+<script type="text/javascript" src="script/jquery.js"></script>
+<script type="text/javascript" src="script/config.js"></script>
+<script type="text/javascript" src="script/jquery.mloading.js"></script>
+<script type="text/javascript" src="script/aui-toast.js" ></script>
+<script type="text/javascript" src="script/scroll.js" ></script>
+<script type="text/javascript">
+	$(function () {
+	/*
+   * 智慧商圈
+   * 广告
+   * */
+	var banner="";
+	var house_banner=$(".house-banner");
+	$.ajax({
+		async:false,
+		cache:false,
+		type: 'get',
+		dataType : "json",
+		url: dataServiceLocation+"/api/ad/lunbo",
+		error: function () {
+			alert('请求失败');
+		},
+		success:function(data) {
+			console.log(data);
+			$.each(data,function (i,item) {
+				var image = dataServiceLocation+"/"+item;
+				banner +="<div class='aui-slide-node bg-dark'>"
+					+"<img src='"+image+"' />"
+					+"</div>";
+			});
+			house_banner.append(banner);
+		}
+	});
+	/**
+	 * 首页广告图
+	 **/
+        var index_banner=$(".index_banner");
+        $.ajax({
+            async:false,
+            cache:false,
+            type: 'get',
+            dataType : "json",
+            url: dataServiceLocation+"/api/ad/list/1",
+            error: function () {
+                alert('请求失败');
+            },
+            success:function(data) {
+                console.log(data[0].img);
+                var image = dataServiceLocation+"/"+data[0].img;
+                index_banner.attr('src',image)
+            }
+        })
+
+	var advert = sessionStorage.getItem("advert");
+	if(advert == ''||advert==null){
+		$(".advert").show();
+        var second = 5;
+		var s= setInterval(function () {
+            $(".second").text(second);
+            second--;
+            if(second==0){
+                clearInterval(s);
+            }
+            console.log(second);
+        },1000);
+        setTimeout(function () {
+            $(".advert").hide();
+            $(".second").hide();
+            sessionStorage.setItem("advert","1");
+        },5000);
+
+	}else if(advert=='1'){
+        $(".advert").hide();
+	}
+
+    showDefault('loading');
+    var slide = new auiSlide({
+        container:document.getElementById("aui-slide"),
+        "height":180,
+        "speed":300,
+        "autoPlay":5000, //自动播放时间
+        "pageShow":true,
+        "loop":true,
+        "pageStyle":'dot',
+        'dotPosition':'center'
+    })
+
+    function currentFun(index) {
+        console.log(index);
+    }
+    var slide2 = new auiSlide({
+        container:document.getElementById("aui-slide2"),
+        "height":170,
+        "autoPlay":0, //自动播放
+        "pageShow":true,
+        "loop":true,
+        "pageStyle":'dot',
+        'dotPosition':'center'
+    });
+    /**
+	 *刷新整个页面
+	 **/
+     var pullRefresh = new auiPullToRefresh({
+        container: document.querySelector('.aui-refresh-content'),
+        triggerDistance: 100
+    },function(ret){
+        if(ret.status=="success"){
+            setTimeout(function(){
+                var wrap = document.getElementById("aui-list-notice")
+    pullRefresh.cancelLoading(); //刷新成功后调用此方法隐藏
+    },1500)
+    }
+    });
+
+    /*
+    * 智慧商圈
+    * 子类
+    * */
+    var icon="";
+    var house_icon=$(".house-icon");
+		$.ajax({
+			async:false,
+			cache:false,
+			type: 'get',
+			dataType : "json",
+			url: dataServiceLocation+"/api/business/sub",
+			error: function () {
+				alert('请求失败');
+			},
+			success:function(data) {
+                toast.hide();
+				console.log(data);
+//				$('body').mLoading('hide');
+				$.each(data,function (i,item) {
+					var image = dataServiceLocation+"/"+item.icon;
+					icon +="<div class='aui-col-xs-five aui-flex-auto card_link' data-id='"+item.id+"'>"
+					+"<a href='notice_list.html?id="+item.id+"'>"
+					+"<i class='aui-iconfont '><img src='"+image+"' alt=''></i>"
+					+"<div class='aui-grid-label custom-small-font-8'>"+item.name+"</div>"
+					+"</a></div>";
+				})
+				house_icon.empty().append(icon);
+			}
+		});
+
+        /**
+         * 文字广告
+         */
+        var tb="";
+        var text_banner=$(".text-banner");
+        $.ajax({
+            async:false,
+            cache:false,
+            type: 'get',
+            dataType : "json",
+            url: dataServiceLocation+"/api/ad/text",
+            error: function () {
+                alert('请求失败');
+            },
+            success:function(data) {
+                console.log(data);
+                $.each(data,function (i,item) {
+                    tb +="<li class='aui-list-item' style='margin-bottom: 10px'>"
+                        +"<div class='aui-media-list-item-inner'>"
+                        +"<div class='aui-list-item-inner'>"
+                        +"<div class='aui-list-item-text'>"
+                        +"<div class='aui-info-item aui-font-size-12'>"+item.text+"</div>"
+                        +"</div></div></div>"
+                        +"</li>";
+                });
+                text_banner.empty().append(tb);
+            }
+        })
+    });
+    window.onscroll = function () {
+        //监听事件内容
+        if (getScrollHeight() == getWindowHeight() + getDocumentTop()) {
+            //当滚动条到底时,这里是触发内容
+            showDefault('loading');
+        }
+    };
+
+</script>
+
+</html>
