@@ -42,7 +42,9 @@
                 <td>
                     <select name="cate_id">
                         @foreach($data as $d)
-                        <option value="{{$d->cate_id}}">{{$d->_cate_name}}</option>
+                        <option value="{{$d->cate_id}}"
+                                @if($d->cate_id==$cate_id) selected @endif
+                        >{{$d->_cate_name}}</option>
                         @endforeach
                     </select>
                 </td>

@@ -23,7 +23,8 @@ class ArticleController extends CommonController
     public function create()
     {
         $data = (new Category)->tree();
-        return view('admin.article.add',compact('data'));
+        $cate_id = Input::get('cate_id') ? Input::get('cate_id') : 0;
+        return view('admin.article.add',compact('data','cate_id'));
     }
 
     //post.admin/article  添加文章提交
@@ -97,7 +98,7 @@ class ArticleController extends CommonController
     public function getArticleByCateId($cate_id)
     {
         $data = Article::orderBy('art_id','desc')->where('cate_id',$cate_id)->paginate(10);
-        return view('admin.article.index',compact('data'));
+        return view('admin.article.index',compact('data','cate_id'));
     }
 
 }
