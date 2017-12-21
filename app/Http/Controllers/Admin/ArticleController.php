@@ -30,7 +30,7 @@ class ArticleController extends CommonController
     //post.admin/article  添加文章提交
     public function store()
     {
-        $input = Input::except('_token');
+        $input = Input::except('_token','file_upload','file_upload_ad');
         $input['art_time'] = time();
 
         $rules = [
@@ -68,7 +68,7 @@ class ArticleController extends CommonController
     //put.admin/article/{article}    更新文章
     public function update($art_id)
     {
-        $input = Input::except('_token','_method');
+        $input = Input::except('_token','_method','file_upload','file_upload_ad');
         $re = Article::where('art_id',$art_id)->update($input);
         if($re){
             return redirect('admin/article');
