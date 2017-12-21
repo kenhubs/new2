@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
-class ConfigController extends Controller
+class ConfigController extends  CommonController
 {
     //get.admin/config  全部配置项列表
     public function index()

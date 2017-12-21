@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
-class LinksController extends Controller
+class LinksController extends  CommonController
 {
     //get.admin/links  全部友情链接列表
     public function index()
