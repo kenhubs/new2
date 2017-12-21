@@ -65,7 +65,7 @@
             <tr>
                 <th>图标：</th>
                 <td>
-                    <input type="text" size="50" name="cate_icon">
+                    <input type="hidden" size="50" name="cate_icon">
                     <input id="file_upload" name="file_upload" type="file" multiple="true">
                     <script src="{{asset('resources/org/uploadify/jquery.uploadify.min.js')}}" type="text/javascript"></script>
                     <link rel="stylesheet" type="text/css" href="{{asset('resources/org/uploadify/uploadify.css')}}">
