@@ -48,7 +48,7 @@ class ArticleController extends CommonController
         if($validator->passes()){
             $re = Article::create($input);
             if($re){
-                return redirect('admin/article');
+                return redirect('admin/article/list/'.$input['cate_id']);
             }else{
                 return back()->with('errors','数据填充失败，请稍后重试！');
             }
@@ -71,7 +71,7 @@ class ArticleController extends CommonController
         $input = Input::except('_token','_method','file_upload','file_upload_ad');
         $re = Article::where('art_id',$art_id)->update($input);
         if($re){
-            return redirect('admin/article/list/'.$input->cate_id);
+            return redirect('admin/article/list/'.$input['cate_id']);
         }else{
             return back()->with('errors','文章更新失败，请稍后重试！');
         }
