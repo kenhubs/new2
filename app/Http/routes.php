@@ -70,6 +70,8 @@ Route::group(['middleware' => ['web','admin.login'],'prefix'=>'admin','namespace
     Route::resource('config', 'ConfigController');
 
     Route::any('upload', 'CommonController@upload');
+    Route::any('fileUpload/{fileType}', 'CommonController@fileUpload');
+    Route::any('webupload', 'CommonController@webupload');
     Route::any('cache/clear', 'CommonController@cacheClear');
 
     Route::resource('ad', 'AdController');

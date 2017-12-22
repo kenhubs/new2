@@ -65,13 +65,30 @@
             <tr>
                 <th>图标：</th>
                 <td>
-                    <input type="hidden" size="50" name="cate_icon">
+                    <div class="form-group"  id="cateImg">
+                        <div class="col-lg-4">
+                            <div class="show-cateImg">
+
+                            </div>
+                            <div id="picker-cateImg">
+
+                            </div>
+                            <div class="progress" style="display: none;">
+                                <div class="progress-bar progress-bar-striped active" role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: 10%">
+                                </div>
+                            </div>
+                            <input type="hidden" class="form-control inputMap-headerImg" name="cateImg" placeholder="" value=""/>
+                        </div>
+                    </div>
+                </td>
+                {{--<td>--}}
+                    {{--<input type="hidden" size="50" name="cate_icon">
                     <input id="file_upload" name="file_upload" type="file" multiple="true">
                     <script src="{{asset('resources/org/uploadify/jquery.uploadify.min.js')}}" type="text/javascript"></script>
-                    <link rel="stylesheet" type="text/css" href="{{asset('resources/org/uploadify/uploadify.css')}}">
+                    <link rel="stylesheet" type="text/css" href="{{asset('resources/org/uploadify/uploadify.css')}}">--}}
                     <script type="text/javascript">
                         <?php $timestamp = time();?>
-                        $(function() {
+                        /*$(function() {
                             $('#file_upload').uploadify({
                                 multi: false,
                                 'buttonText' : '图片上传',
@@ -88,14 +105,14 @@
                                     $('input[name=cate_icon]').val(imgValue);
                                 }
                             });
-                        });
+                        });*/
                     </script>
                     <style>
                         .uploadify{display:inline-block;}
                         .uploadify-button{border:none; border-radius:5px; margin-top:8px;}
                         table.add_tab tr td span.uploadify-button-text{color: #FFF; margin:0;}
                     </style>
-                </td>
+                {{--</td>--}}
             </tr>
             <tr>
                 <th></th>
@@ -138,4 +155,11 @@
     </form>
 </div>
 
+@endsection
+@section('js')
+    <script>
+        window.onload = function(){
+            myUploadApp.uploadBase('coinImg','img', '选择一张景点列表图片')
+        }
+    </script>
 @endsection
