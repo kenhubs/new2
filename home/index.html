@@ -44,16 +44,26 @@
 			height: 100%;
 			display: none;
 			position: fixed;
-			z-index: 99;
+			z-index: 10000;
 		}
 		.second{
 			position: fixed;
-			z-index: 100;
+			z-index: 10001;
 			top:10px;
 			right:10px;
 			padding: 5px;
 			background-color: #999999;
 			color: #ffffff;
+		}
+		.tg{
+			position: fixed;
+			z-index: 10001;
+			bottom:100px;
+			right:30px;
+			padding: 8px;
+			background-color: #999999;
+			color: #ffffff;
+			border-radius: 5px;
 		}
 	</style>
 	<link rel="stylesheet" href="css/aui-flex.css">
@@ -62,6 +72,7 @@
 <body class="aui-refresh-content" style="background-color:#f2f2f2;">
 	<img src="image/banner1.jpg" class="advert">
 	<span class="second"></span>
+	<span class="tg">跳过</span>
 	<div style="padding: 10px 10px 0 10px">
 		<div id="aui-slide">
 			<div class="aui-slide-wrap house-banner" >
@@ -217,12 +228,21 @@
         setTimeout(function () {
             $(".advert").hide();
             $(".second").hide();
+            $(".tg").hide();
             sessionStorage.setItem("advert","1");
         },5000);
 
 	}else if(advert=='1'){
         $(".advert").hide();
+        $(".second").hide();
+        $(".tg").hide();
 	}
+
+	$(".tg").on('click',function () {
+        $(".advert").hide();
+        $(".second").hide();
+        $(".tg").hide();
+    });
 
     showDefault('loading');
     var slide = new auiSlide({
@@ -284,8 +304,9 @@
 //				$('body').mLoading('hide');
 				$.each(data,function (i,item) {
 					var image = dataServiceLocation+"/"+item.icon;
+					var title = item.name;
 					icon +="<div class='aui-col-xs-five aui-flex-auto card_link' data-id='"+item.id+"'>"
-					+"<a href='notice_list.html?id="+item.id+"'>"
+					+"<a href='notice_list.html?title="+title+"&id="+item.id+"'>"
 					+"<i class='aui-iconfont '><img src='"+image+"' alt=''></i>"
 					+"<div class='aui-grid-label custom-small-font-8'>"+item.name+"</div>"
 					+"</a></div>";

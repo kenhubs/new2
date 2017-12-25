@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>社区公告</title>
@@ -10,20 +11,20 @@
 </head>
 <style>
     .card-time-footer{
-        font-size: 0.4rem;
-        float: right;
+        font-size: 0.5rem;
         position: absolute;
-        right: 1rem;
         bottom: 0.5rem;
         color: #999999;
     }
     .positon-realtive{
         position: relative;
+        height: 100%;
     }
 </style>
 <body>
 <section class="aui-refresh-content">
     <div class="aui-content aui-margin-b-15">
+        <input type="hidden" id="tit">
         <ul class="aui-list aui-media-list" id="aui-list-notice">
 
         </ul>
@@ -38,6 +39,8 @@
 <script type="text/javascript" src="script/aui-toast.js" ></script>
 <script type="text/javascript" src="script/scroll.js" ></script>
 <script type="text/javascript">
+
+
     (function ($) {
         $.getUrlParam = function (name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -45,9 +48,46 @@
             if (r != null) return unescape(r[2]); return null;
         }
     })(jQuery);
+
     var num = 1;
     $(function () {
         requestData(num);
+        var id = $.getUrlParam('id');
+        switch(id)
+        {
+            case '7':
+                document.title = '餐饮美食';
+                break;
+            case '8':
+                document.title = '教育培训';
+                break;
+            case '9':
+                document.title = '家政服务';
+                break;
+            case '10':
+                document.title = '房产租赁';
+                break;
+            case '11':
+                document.title = '休闲娱乐';
+                break;
+            case '12':
+                document.title = '生活购物';
+                break;
+            case '13':
+                document.title = '家居建材';
+                break;
+            case '14':
+                document.title = '社区二手';
+                break;
+            case '15':
+                document.title = '美容养生';
+                break;
+            case '16':
+                document.title = '生鲜特产';
+                break;
+            default:
+                document.title = '我的社区';
+        }
     });
     //懒加载
     new auiLazyload({
@@ -77,6 +117,7 @@
 
     function requestData(page) {
         console.log($.getUrlParam('id'));
+//        document.title = $.getUrlParam('title');
         var li="";
         var list_notice=$("#aui-list-notice");
         $.ajax({
@@ -98,16 +139,19 @@
                     showDefault('success');
                     $.each(data.data,function (i,item) {
                         var image = dataServiceLocation+"/"+item.thumb;
-                        li +="<li data-id='"+item.id+"' class='aui-list-item border-bottom-10 card_link' style='border-bottom: 10px solid #f2f2f2;'>"
+                        li +="<li data-id='"+item.id+"' class='aui-list-item border-bottom-10 card_link' style='border-bottom: 10px solid #f2f2f2;height: 160px;'>"
                             +"<a href='sub_etail.html?id="+item.id+"'><div class='aui-media-list-item-inner positon-realtive'>"
-                            +"<div class='aui-list-item-media' style='width:6rem'>"
-                            +"<img src='"+image+"' data-src='"+image+"'>"
+                            +"<div class='aui-list-item-media' style='width:6rem;height: 100%'>"
+                            +"<img src='"+image+"' data-src='"+image+"' style='height: 100%;'>"
                             +"</div>"
                             +"<div class='aui-list-item-inner'>"
                             +"<div class='aui-list-item-text'>"
                             +"<div class='aui-list-item-title'>"+item.title+"</div>"
                             +"</div>"
-                            +"<div class='card-time-footer'>"+item.time+"</div>"
+                            +"<div class='aui-list-item-text'>"
+                            +"<div class='aui-list-item-title' style='font-size:0.5rem;color: #666666;'>地址:"+item.title+"</div>"
+                            +"</div>"
+                            +"<div class='card-time-footer'>联系电话："+item.phone+"</div>"
                             +"</div>"
                             +"</div></a>"
                             +"</li>";
