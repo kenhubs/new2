@@ -21,7 +21,7 @@
     <div class="aui-content aui-margin-b-15 aui-refresh-content">
         <img src="" class="aui-flex-auto aui-flex-top concent-img" style="height: 8rem;width: 100%">
         <p class="content-title" style="font-size: 0.9rem;margin: 10px 0;">2017年公告标题</p>
-        <div class="aui-content">
+        <div class="aui-content-d">
 
         </div>
     </div>
@@ -62,7 +62,7 @@
                         console.log(data);
                         $(".concent-img").attr('src',image);
                         $(".content-title").text(data.title);
-                        $(".aui-content").append(data.content);
+                        $(".aui-content-d").empty().append(data.content);
                     }
                 });
                 pullRefresh.cancelLoading(); //刷新成功后调用此方法隐藏
@@ -88,7 +88,7 @@
                 console.log(data);
                 $(".concent-img").attr('src',image);
                 $(".content-title").text(data.title);
-                $(".aui-content").append(data.content);
+                $(".aui-content-d").empty().append(data.content);
             }
         })
     })
