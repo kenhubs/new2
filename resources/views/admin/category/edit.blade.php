@@ -110,7 +110,9 @@
                 <th></th>
                 <td id="cate_icon_img">
                     @foreach(explode(',',$field->cate_icon) as $v)
-                        <img alt="" style="max-width: 350px; max-height:100px;" src="/{{$v}}">
+                        @if($v)
+                            <img alt="" style="max-width: 350px; max-height:100px;" src="/{{$v}}">
+                        @endif
                     @endforeach
                 </td>
             </tr>
