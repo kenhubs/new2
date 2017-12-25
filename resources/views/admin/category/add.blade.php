@@ -64,7 +64,7 @@
             </tr>
             <tr>
                 <th>图标：</th>
-                <td>
+                {{--<td>
                     <div class="form-group"  id="cateImg">
                         <div class="col-lg-4">
                             <div class="show-cateImg">
@@ -80,7 +80,7 @@
                             <input type="hidden" class="form-control inputMap-headerImg" name="cateImg" placeholder="" value=""/>
                         </div>
                     </div>
-                </td>
+                </td>--}}
                 <td>
                     <input type="hidden" size="50" name="cate_icon">
                     <input id="file_upload" name="file_upload" type="file" multiple="true">
