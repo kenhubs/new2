@@ -12,6 +12,11 @@
     {{--<script type="text/javascript" src="{{asset('resources/org/webuploader/webuploader.js')}}"></script>--}}
     <script type="text/javascript" src="{{asset('resources/org/uploadLibs/myWebUpload/webuploader.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('resources/org/uploadLibs/myWebUpload/myUploadApp.js')}}"></script>
+    <style>
+        input[type='submit'], input[type='button']{
+            line-height:25px;
+        }
+    </style>
 </head>
 <body>
 <!--头部 开始-->
