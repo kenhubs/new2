@@ -63,7 +63,7 @@ class ApiController extends Controller
     public function convenienceList(){
         $page = Input::get('page') ? Input::get('page') : 1;
         $res = Cache::remember('api_convenience_page_'.$page, 120, function() {
-            return $this->artListHandle('SQXW',['id','title','thumb','time']);
+            return $this->artListHandle('SQBM',['id','title','thumb','time']);
         });
         return response()->json($res);
     }
