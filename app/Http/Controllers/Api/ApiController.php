@@ -17,7 +17,7 @@ class ApiController extends Controller
     public function noticeList(){
         $page = Input::get('page') ? Input::get('page') : 1;
         $res = Cache::remember('api_notice_page_'.$page, 120, function() {
-            return $this->artListHandle('SQGG',['id','title','thumb','time']);
+            return $this->artListHandle('SQGG',['id','title','editor','area','thumb','time']);
         });
         return response()->json($res);
     }
@@ -28,7 +28,7 @@ class ApiController extends Controller
     public function newsList(){
         $page = Input::get('page') ? Input::get('page') : 1;
         $res = Cache::remember('api_news_page_'.$page, 120, function() {
-            return $this->artListHandle('SQXW',['id','title','thumb','time']);
+            return $this->artListHandle('SQXW',['id','title','editor','area','thumb','time']);
         });
         return response()->json($res);
     }
@@ -51,19 +51,19 @@ class ApiController extends Controller
     public function baikeList(){
         $page = Input::get('page') ? Input::get('page') : 1;
         $res = Cache::remember('api_baike_page_'.$page, 120, function() {
-            return $this->artListHandle('SQBK',['id','title','thumb','time']);
+            return $this->artListHandle('SQBK',['id','title','editor','area','thumb','time']);
         });
         return response()->json($res);
     }
     public function baikeDetail($id){
-        return response()->json($this->getArtDetail($id,['id','title','thumb','content','time','ad_title','ad_img']));
+        return response()->json($this->getArtDetail($id,['id','title','editor','area','thumb','content','time','ad_title','ad_img']));
     }
 
     //社区便民
     public function convenienceList(){
         $page = Input::get('page') ? Input::get('page') : 1;
         $res = Cache::remember('api_convenience_page_'.$page, 120, function() {
-            return $this->artListHandle('SQBM',['id','title','thumb','time']);
+            return $this->artListHandle('SQBM',['id','title','editor','area','thumb','time']);
         });
         return response()->json($res);
     }
@@ -92,7 +92,7 @@ class ApiController extends Controller
         $page = Input::get('page') ? Input::get('page') : 1;
         $res = Cache::remember('api_business_'.$id.'_page_'.$page, 120, function() use($id) {
             $cate_uuid = Category::find($id)->cate_uuid;
-            return $this->artListHandle($cate_uuid,['id','title','thumb','address','phone','time']);
+            return $this->artListHandle($cate_uuid,['id','title','editor','area','thumb','address','phone','time']);
         });
         return response()->json($res);
     }
