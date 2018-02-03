@@ -91,53 +91,21 @@
             <tr class="adContent">
                 <th>广告图片：</th>
                 <td>
-                    <input type="hidden" size="50" name="ad_img" value="{{$field->ad_img}}">
-                    <input id="file_upload" name="file_upload" type="file" multiple="true">
-                    <script src="{{asset('resources/org/uploadify/jquery.uploadify.min.js')}}" type="text/javascript"></script>
-                    <link rel="stylesheet" type="text/css" href="{{asset('resources/org/uploadify/uploadify.css')}}">
-                    <script type="text/javascript">
-                        <?php $timestamp = time();?>
-                        $(function() {
-                            var isClear = false
-                            $('#file_upload').uploadify({
-                                multi: false,
-                                'buttonText' : '图片上传',
-                                'formData'     : {
-                                    'timestamp' : '<?php echo $timestamp;?>',
-                                    '_token'     : "{{csrf_token()}}"
-                                },
-                                'swf'      : "{{asset('resources/org/uploadify/uploadify.swf')}}",
-                                'uploader' : "{{url('admin/upload')}}",
-                                'onUploadSuccess' : function(file, data, response) {
-                                    /*$('input[name=art_thumb]').val(data);
-                                    $('#art_thumb_img').attr('src','/'+data);*/
-                                    if(!isClear){
-                                        $('input[name=ad_img]').val('');
-                                        $('#ad_img').empty()
-                                        isClear = true
-                                    }
+                    <div id="ad_img">
+                        <div class="show-ad_img">
+                            @if($field->ad_img)
+                                <img src="{{$field->ad_img}}" class="thumbnail_ad_img" width="200px;" onclick="myUploadApp.del('ad_img','img','选择图片')">
+                            @endif
+                        </div>
+                        <div id="picker-ad_img" class="wu-example">
 
-                                    $('#ad_img').append('<img src="/'+data+'" alt="" style="max-width: 350px; max-height:100px;">')
-                                    var imgValue = $('input[name=ad_img]').val()
-                                    imgValue += imgValue ? ','+data : data
-                                    $('input[name=ad_img]').val(imgValue)
-                                }
-                            });
-                        });
-                    </script>
-                    <style>
-                        .uploadify{display:inline-block;}
-                        .uploadify-button{border:none; border-radius:5px; margin-top:8px;}
-                        table.add_tab tr td span.uploadify-button-text{color: #FFF; margin:0;}
-                    </style>
-                </td>
-            </tr>
-            <tr>
-                <th></th>
-                <td id="ad_img">
-                    @foreach(explode(',',$field->ad_img) as $v)
-                        <img alt="" style="max-width: 350px; max-height:100px;" src="/{{$v}}">
-                    @endforeach
+                        </div>
+                        <div class="progress" style="display: none;width: 300px;">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="max-width: 100%;height: 5px;">
+                            </div>
+                        </div>
+                        <input type="hidden" readonly class="lg inputMap-ad_img pub-hide" name="ad_img" value="{{$field->ad_img ? $field->ad_img : ''}}"/>
+                    </div>
                 </td>
             </tr>
             @endif
@@ -157,6 +125,9 @@
 @section('js')
     <script>
         $(function(){
+            var ad_img = "{{$field->ad_img ? $field->ad_img : ''}}"
+            if(!ad_img) myUploadApp.uploadBase('ad_img', 'img', '选择图片')
+            
             window.app = {
                 require:['ad_title','ad_text'],
                 msgConfig:{

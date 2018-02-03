@@ -11,10 +11,54 @@
     <script type="text/javascript" src="{{asset('resources/org/layer/layer.js')}}"></script>
     {{--<script type="text/javascript" src="{{asset('resources/org/webuploader/webuploader.js')}}"></script>--}}
     <script type="text/javascript" src="{{asset('resources/org/uploadLibs/myWebUpload/webuploader.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('resources/org/uploadLibs/myWebUpload/myUploadApp.js')}}"></script>
+    <script type="text/javascript" src="{{asset('resources/org/'.config('app.static_pre','mymin').'/myUploadApp.js')}}"></script>
+    <script type="text/javascript" src="{{asset('resources/org/uploadLibs/myWebUpload/vue.js')}}"></script>
     <style>
         input[type='submit'], input[type='button']{
             line-height:25px;
+        }
+        
+        .pub-hide{
+            display: none;
+        }
+
+        #imgPicker{
+            border:none;
+            background: none;
+            outline: none;
+        }
+        .webuploader-element-invisible{
+            display: none;
+        }
+        .webuploader-container {
+            position: relative;
+        }
+        .webuploader-element-invisible {
+            position: absolute !important;
+            clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+            clip: rect(1px,1px,1px,1px);
+        }
+        .webuploader-pick {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background: #00b7ee;
+            /*padding: 10px 15px;*/
+            color: #fff;
+            text-align: center;
+            border-radius: 3px;
+            overflow: hidden;
+            width: 120px;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .webuploader-pick-hover {
+            background: #00a2d4;
+        }
+
+        .webuploader-pick-disable {
+            opacity: 0.6;
+            pointer-events:none;
         }
     </style>
 </head>

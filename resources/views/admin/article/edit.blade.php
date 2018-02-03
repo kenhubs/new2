@@ -65,50 +65,21 @@
             <tr>
                 <th>缩略图：</th>
                 <td>
-                    <input type="hidden" size="50" name="art_thumb" value="{{$field->art_thumb}}">
-                    <input id="file_upload" name="file_upload" type="file" multiple="true">
-                    <script src="{{asset('resources/org/uploadify/jquery.uploadify.min.js')}}" type="text/javascript"></script>
-                    <link rel="stylesheet" type="text/css" href="{{asset('resources/org/uploadify/uploadify.css')}}">
-                    <script type="text/javascript">
-                        <?php $timestamp = time();?>
-                        $(function() {
-                            var isClear = false
-                            $('#file_upload').uploadify({
-                                'buttonText' : '图片上传',
-                                'formData'     : {
-                                    'timestamp' : '<?php echo $timestamp;?>',
-                                    '_token'     : "{{csrf_token()}}"
-                                },
-                                'swf'      : "{{asset('resources/org/uploadify/uploadify.swf')}}",
-                                'uploader' : "{{url('admin/upload')}}",
-                                'onUploadSuccess' : function(file, data, response) {
-                                    if(!isClear){
-                                        $('input[name=art_thumb]').val('');
-                                        $('#art_thumb_img').empty()
-                                        isClear = true
-                                    }
+                    <div id="art_thumb">
+                        <div class="show-art_thumb">
+                            @if($field->art_thumb)
+                                <img src="/{{$field->art_thumb}}" class="thumbnail_art_thumb" width="200px;" onclick="myUploadApp.del('art_thumb','img','选择图片')">
+                            @endif
+                        </div>
+                        <div id="picker-art_thumb" class="wu-example">
 
-                                    $('#art_thumb_img').append('<img src="/'+data+'" alt="" style="max-width: 350px; max-height:100px;">')
-                                    var imgValue = $('input[name=art_thumb]').val()
-                                    imgValue += imgValue ? ','+data : data
-                                    $('input[name=art_thumb]').val(imgValue)
-                                }
-                            });
-                        });
-                    </script>
-                    <style>
-                        .uploadify{display:inline-block;}
-                        .uploadify-button{border:none; border-radius:5px; margin-top:8px;}
-                        table.add_tab tr td span.uploadify-button-text{color: #FFF; margin:0;}
-                    </style>
-                </td>
-            </tr>
-            <tr>
-                <th></th>
-                <td id="art_thumb_img">
-                    @foreach(explode(',',$field->art_thumb) as $v)
-                        <img alt="" style="max-width: 350px; max-height:100px;" src="/{{$v}}">
-                    @endforeach
+                        </div>
+                        <div class="progress" style="display: none;width: 300px;">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="max-width: 100%;height: 5px;">
+                            </div>
+                        </div>
+                        <input type="hidden" readonly class="lg inputMap-art_thumb pub-hide" name="art_thumb" value="{{$field->art_thumb ? $field->art_thumb : ''}}"/>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -156,44 +127,21 @@
             <tr>
                 <th>广告图片：</th>
                 <td>
-                    <input type="hidden" size="50" name="art_ad_img" value="{{$field->art_ad_img}}">
-                    <input id="file_upload_ad" name="file_upload_ad" type="file" multiple="true">
-                    <script type="text/javascript">
-                        <?php $timestamp = time();?>
-                        $(function() {
-                            var isClear = false
-                            $('#file_upload_ad').uploadify({
-                                multi: false,
-                                'buttonText' : '图片上传',
-                                'formData'     : {
-                                    'timestamp' : '<?php echo $timestamp;?>',
-                                    '_token'     : "{{csrf_token()}}"
-                                },
-                                'swf'      : "{{asset('resources/org/uploadify/uploadify.swf')}}",
-                                'uploader' : "{{url('admin/upload')}}",
-                                'onUploadSuccess' : function(file, data, response) {
-                                    if(!isClear){
-                                        $('input[name=art_ad_img]').val('');
-                                        $('#art_ad_img').empty()
-                                        isClear = true
-                                    }
+                    <div id="art_ad_img">
+                        <div class="show-art_ad_img">
+                            @if($field->art_ad_img)
+                                <img src="/{{$field->art_ad_img}}" class="thumbnail_art_ad_img" width="200px;" onclick="myUploadApp.del('art_ad_img','img','选择图片')">
+                            @endif
+                        </div>
+                        <div id="picker-art_ad_img" class="wu-example">
 
-                                    $('#art_ad_img').append('<img src="/'+data+'" alt="" style="max-width: 350px; max-height:100px;">')
-                                    var imgValue = $('input[name=art_ad_img]').val()
-                                    imgValue += imgValue ? ','+data : data
-                                    $('input[name=art_ad_img]').val(imgValue)
-                                }
-                            });
-                        });
-                    </script>
-                </td>
-            </tr>
-            <tr>
-                <th></th>
-                <td id="art_ad_img">
-                    @foreach(explode(',',$field->art_ad_img) as $v)
-                        <img alt="" style="max-width: 350px; max-height:100px;" src="/{{$v}}">
-                    @endforeach
+                        </div>
+                        <div class="progress" style="display: none;width: 300px;">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="max-width: 100%;height: 5px;">
+                            </div>
+                        </div>
+                        <input type="hidden" readonly class="lg inputMap-art_ad_img pub-hide" name="art_ad_img" value="{{$field->art_ad_img ? $field->art_ad_img : ''}}"/>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -207,5 +155,14 @@
         </table>
     </form>
 </div>
-
+<script>
+    window.config={
+        art_thumb:"{{$field->art_thumb ? $field->art_thumb : ''}}",
+        art_ad_img:"{{$field->art_ad_img ? $field->art_ad_img : ''}}"
+    }
+    window.onload = function(){
+        if(!config.art_thumb) myUploadApp.uploadBase('art_thumb', 'img', '选择图片')
+        if(!config.art_ad_img) myUploadApp.uploadBase('art_ad_img', 'img', '选择图片')
+    }
+</script>
 @endsection

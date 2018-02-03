@@ -64,59 +64,21 @@
             </tr>
             <tr>
                 <th>图标：</th>
-                {{--<td>
-                    <div class="form-group"  id="cateImg">
-                        <div class="col-lg-4">
-                            <div class="show-cateImg">
-
-                            </div>
-                            <div id="picker-cateImg">
-
-                            </div>
-                            <div class="progress" style="display: none;">
-                                <div class="progress-bar progress-bar-striped active" role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="width: 10%">
-                                </div>
-                            </div>
-                            <input type="hidden" class="form-control inputMap-headerImg" name="cateImg" placeholder="" value=""/>
-                        </div>
-                    </div>
-                </td>--}}
                 <td>
                     <input type="hidden" size="50" name="cate_icon">
-                    <input id="file_upload" name="file_upload" type="file" multiple="true">
-                    <script src="{{asset('resources/org/uploadify/jquery.uploadify.min.js')}}" type="text/javascript"></script>
-                    <link rel="stylesheet" type="text/css" href="{{asset('resources/org/uploadify/uploadify.css')}}">
-                    <script type="text/javascript">
-                        <?php $timestamp = time();?>
-                        $(function() {
-                            $('#file_upload').uploadify({
-                                multi: false,
-                                'buttonText' : '图片上传',
-                                'formData'     : {
-                                    'timestamp' : '<?php echo $timestamp;?>',
-                                    '_token'     : "{{csrf_token()}}"
-                                },
-                                'swf'      : "{{asset('resources/org/uploadify/uploadify.swf')}}",
-                                'uploader' : "{{url('admin/upload')}}",
-                                'onUploadSuccess' : function(file, data, response) {
-                                    $('#cate_icon_img').append('<img src="/'+data+'" alt="" style="max-width: 350px; max-height:100px;">')
-                                    var imgValue = $('input[name=cate_icon]').val()
-                                    imgValue += imgValue ? ','+data : data
-                                    $('input[name=cate_icon]').val(imgValue);
-                                }
-                            });
-                        });
-                    </script>
-                    <style>
-                        .uploadify{display:inline-block;}
-                        .uploadify-button{border:none; border-radius:5px; margin-top:8px;}
-                        table.add_tab tr td span.uploadify-button-text{color: #FFF; margin:0;}
-                    </style>
-                </td>
-            </tr>
-            <tr>
-                <th></th>
-                <td id="cate_icon_img">
+                    <div id="cate_icon">
+                        <div class="show-cate_icon">
+
+                        </div>
+                        <div id="picker-cate_icon" class="wu-example">
+
+                        </div>
+                        <div class="progress" style="display: none;width: 300px;">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar"  aria-valuemin="0" aria-valuemax="100" style="max-width: 100%;height: 5px;">
+                            </div>
+                        </div>
+                        <input type="hidden" readonly class="lg inputMap-cate_icon pub-hide" name="cate_icon" value=""/>
+                    </div>
                 </td>
             </tr>
             {{--<tr>
@@ -159,7 +121,7 @@
 @section('js')
     <script>
         window.onload = function(){
-           // myUploadApp.uploadBase('coinImg','img', '选择一张景点列表图片')
+            myUploadApp.uploadBase('cate_icon','img', '选择图片')
         }
     </script>
 @endsection

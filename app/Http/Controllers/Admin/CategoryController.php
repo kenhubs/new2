@@ -49,7 +49,7 @@ class CategoryController extends CommonController
     //post.admin/category  添加分类提交
     public function store()
     {
-        $input = Input::except('_token','file_upload');
+        $input = Input::except('_token','file');
         $rules = [
             'cate_name'=>'required',
             'cate_uuid'=>'required'
@@ -85,7 +85,7 @@ class CategoryController extends CommonController
     //put.admin/category/{category}    更新分类
     public function update($cate_id)
     {
-        $input = Input::except('_token','_method','file_upload');
+        $input = Input::except('_token','_method','file');
         $re = Category::where('cate_id',$cate_id)->update($input);
         if($re){
             return redirect('admin/category');

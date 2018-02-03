@@ -46,7 +46,7 @@
                     @else
                         <td>
                             @foreach(explode(',',$v->ad_img) as $vv)
-                                <img alt="" style="max-width: 350px; max-height:100px;" src="/{{$vv}}">
+                                <img alt="" style="max-width: 350px; max-height:100px;" src="{{url($vv)}}">
                             @endforeach
                         </td>
                         <td>

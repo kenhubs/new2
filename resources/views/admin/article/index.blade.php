@@ -40,7 +40,7 @@
                     <td>
                         <a href="#">{{$v->art_title}}</a>
                     </td>
-                    <td style="text-align: center"><img src="{{url($v->art_thumb)}}" alt="" height="50px"></td>
+                    <td style="text-align: center"><img src="/{{$v->art_thumb}}" alt="" height="50px"></td>
                     <td>{{$v->cate->cate_name}}</td>
                     <td>{{$v->art_editor}}</td>
                     <td>{{date('Y-m-d',$v->art_time)}}</td>

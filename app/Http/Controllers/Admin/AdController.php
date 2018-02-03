@@ -47,7 +47,7 @@ class AdController extends CommonController
      */
     public function store()
     {
-        $input = Input::except('_token');
+        $input = Input::except('_token','file');
         if($input['ad_type']==1){
             $input['ad_cate_id']=0;
             $input['ad_position']=0;
@@ -92,7 +92,7 @@ class AdController extends CommonController
      */
     public function update($ad_id)
     {
-        $input = Input::except('_token','_method');
+        $input = Input::except('_token','_method','file');
         if($input['ad_type']==1){
             $input['ad_cate_id']=0;
             $input['ad_position']=0;

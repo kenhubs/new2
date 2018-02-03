@@ -15,6 +15,8 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'static_pre'=>env('STATIC_PRE'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
